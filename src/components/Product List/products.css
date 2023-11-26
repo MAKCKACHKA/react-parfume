@@ -1,0 +1,15 @@
+@import url(../../styles/root.css);
+
+/* .swiper-section {
+  height: 100vh;
+} */
+html,
+body {
+  position: relative;
+  height: 100%;
+}
+
+/* .swiper {
+  /* width: 100%;
+  height: 100%; */
+/* } */
