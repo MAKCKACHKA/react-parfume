@@ -1,4 +1,7 @@
 import { IoMdClose } from "react-icons/io";
+import { FaTiktok } from "react-icons/fa";
+import { IoLogoInstagram } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 import "../styles/main.css";
 export default function Mobile({ setisMobile, isMobile }) {
@@ -22,19 +25,27 @@ export default function Mobile({ setisMobile, isMobile }) {
         <nav className="mobile-navigation">
           <ul className="mobile-navigation-list">
             <li className="mobile-navigation-link">
-              <a href="./index.html" className="nav-link">
-                Studio
-              </a>
+              <Link
+                to="/react-parfume"
+                end="true"
+                className="nav-link"
+                onClick={() => setisMobile(false)}
+              >
+                Головна
+              </Link>
             </li>
             <li className="mobile-navigation-link">
-              <a href="./portfolio.html" className="nav-link">
-                Portfolio
-              </a>
+              <Link
+                to="/react-parfume/catalog"
+                end="true"
+                className="nav-link"
+                onClick={() => setisMobile(false)}
+              >
+                Каталог
+              </Link>
             </li>
             <li className="mobile-navigation-link contacts">
-              <a href="#" className="nav-link">
-                Contacts
-              </a>
+              <div className="nav-link">Контакти</div>
             </li>
           </ul>
         </nav>
@@ -59,30 +70,12 @@ export default function Mobile({ setisMobile, isMobile }) {
         <ul className="mobile-social-list">
           <li className="mobile-social-list-item">
             <a href="#" className="mobile-social-list-link">
-              <svg className="mobile-social-list-icon">
-                <use href="../images/icons.svg#instagram"></use>
-              </svg>
+              <IoLogoInstagram className="mobile-social-list-icon" />
             </a>
           </li>
           <li className="mobile-social-list-item">
             <a href="" className="mobile-social-list-link">
-              <svg className="mobile-social-list-icon">
-                <use href="../images/icons.svg#twitter"></use>
-              </svg>
-            </a>
-          </li>
-          <li className="mobile-social-list-item">
-            <a href="" className="mobile-social-list-link">
-              <svg className="mobile-social-list-icon">
-                <use href="../images/icons.svg#facebook"></use>
-              </svg>
-            </a>
-          </li>
-          <li className="mobile-social-list-item">
-            <a href="" className="mobile-social-list-link">
-              <svg className="mobile-social-list-icon">
-                <use href="../images/icons.svg#linkedin"></use>
-              </svg>
+              <FaTiktok className="mobile-social-list-icon" />
             </a>
           </li>
         </ul>

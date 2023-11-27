@@ -1,37 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../images/icons.svg";
 import { FaTiktok } from "react-icons/fa";
 import { IoMenuSharp } from "react-icons/io5";
 import { IoLogoInstagram } from "react-icons/io5";
+import { FiShoppingCart } from "react-icons/fi";
+
+import { Suspense } from "react";
+import { Link, Outlet } from "react-router-dom";
 
 // import "./wrapper-styles.css";
 import "../styles/main.css";
-export default function Wrapper({ setisMobile, children }) {
+import ScrollUp from "./ScrollUp";
+import Mobile from "./Mobile-menu";
+
+import { useLocation } from "react-router-dom";
+
+export default function Wrapper() {
+  const [isMobile, setisMobile] = useState(false);
+  const location = useLocation().pathname;
   return (
     <>
       <header>
         <div className="container header-container">
           <nav className="navigation">
-            <a href="./index.html" className="logo">
+            {/* <Link className="logo" to="/goit-react-hw-05-movies" end="true">
+              Home
+            </Link> */}
+            <Link className="logo" to="/react-parfume" end="true">
               <span className="logo-first-part">Web</span>Studio
-            </a>
+            </Link>
             <ul className="navigation-list">
               <li className="navigation-link">
-                <a href="./index.html" className="link current-page">
+                <Link
+                  to="/react-parfume"
+                  end="true"
+                  className={
+                    location === "/react-parfume" ? "link current-page" : "link"
+                  }
+                >
                   Головна
-                </a>
+                </Link>
               </li>
               <li className="navigation-link">
-                <a href="./portfolio.html" className="link">
+                <Link
+                  to="/react-parfume/catalog"
+                  end="true"
+                  className={
+                    location === "/react-parfume/catalog"
+                      ? "link current-page"
+                      : "link"
+                  }
+                >
                   Каталог
-                </a>
+                </Link>
               </li>
-              <li className="navigation-link">
-                <a href="#" className="link">
-                  Покупки
-                </a>
-              </li>
+              {/* <li className="navigation-link">
+                <Link to="/react-parfume" end="true" className="link">
+                  <FiShoppingCart className="cart-icon" />
+                </Link>
+              </li> */}
             </ul>
           </nav>
           <address>
@@ -48,6 +76,13 @@ export default function Wrapper({ setisMobile, children }) {
               </li>
             </ul>
           </address>
+          <Link to="/react-parfume/buy" end="true" className="link">
+            <FiShoppingCart className="cart-icon" />
+            <div className="cart-icon-info">
+              <p>1</p>
+            </div>
+          </Link>
+
           <button
             className="menu-toggle js-open-menu"
             aria-expanded="false"
@@ -61,7 +96,11 @@ export default function Wrapper({ setisMobile, children }) {
           </button>
         </div>
       </header>
-      {children}
+
+      <Suspense fallback={<div className="hero-title">Loading page...</div>}>
+        <Outlet />
+      </Suspense>
+
       <footer className="footer">
         <ul className="container footer-list">
           <li className="footer-container">
@@ -77,12 +116,18 @@ export default function Wrapper({ setisMobile, children }) {
             <p className="footer-contain-text">Social media</p>
             <ul className="footer-social-list">
               <li className="footer-social-list-item">
-                <a href="#" className="footer-social-list-link">
+                <a
+                  href="https://www.instagram.com/?hl=en"
+                  className="footer-social-list-link"
+                >
                   <IoLogoInstagram className="footer-social-list-icon" />
                 </a>
               </li>
               <li className="footer-social-list-item">
-                <a href="" className="footer-social-list-link">
+                <a
+                  href="https://www.tiktok.com/"
+                  className="footer-social-list-link"
+                >
                   <FaTiktok className="footer-social-list-icon" />
                 </a>
               </li>
@@ -125,6 +170,8 @@ export default function Wrapper({ setisMobile, children }) {
           </li>
         </ul>
       </footer>
+      <ScrollUp />
+      {<Mobile isMobile={isMobile} setisMobile={setisMobile} />}
     </>
   );
 }

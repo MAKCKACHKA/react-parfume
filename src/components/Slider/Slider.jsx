@@ -65,7 +65,7 @@ export default function Slider() {
       {data.map((product, index) => (
         <SwiperSlide id={product.code} key={index}>
           <div className="portfolio-list-item">
-            <a href="#" className="portfolio-item-link">
+            <div className="portfolio-item-link">
               <div className="img-wrapper">
                 <img
                   className="prod-img"
@@ -80,7 +80,7 @@ export default function Slider() {
                 <h3 className="portfolio-item-title">{product.name}</h3>
                 <p className="portfolio-item-text">{product.description}</p>
               </div>
-            </a>
+            </div>
           </div>
         </SwiperSlide>
       ))}

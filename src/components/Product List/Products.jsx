@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import "../../styles/main.css";
-// import "./products.css";
+// import "../../styles/main.css";
+import "./products.css";
+
 export default function Products() {
   const parfums = fetch(
     "https://makckachka.github.io/parfume-project-layout/parfume.json"
@@ -24,20 +25,20 @@ export default function Products() {
     parfums.then((data) => {
       setData(data);
     });
-  }, []);
+  }, [parfums]);
 
   return (
     <ul className="portfolio-list">
       {data.map((product) => (
         <li key={product.code} className="portfolio-list-item">
-          <a href="#" className="portfolio-item-link">
+          <div className="portfolio-item-link">
             <div className="img-wrapper">
               <img
                 className="prod-img"
                 src={product.image}
                 alt={product.name}
                 width="356"
-                height="400"
+                height="356"
               />
               <p className="overlay">{product.description}</p>
             </div>
@@ -45,7 +46,7 @@ export default function Products() {
               <h3 className="portfolio-item-title">{product.name}</h3>
               <p className="portfolio-item-text">{product.description}</p>
             </div>
-          </a>
+          </div>
         </li>
       ))}
 
@@ -71,8 +72,8 @@ export default function Products() {
             <p className="portfolio-item-text">App</p>
           </div>
         </a>
-      </li>
-      <li className="portfolio-list-item">
+      </li> */}
+      {/*<li className="portfolio-list-item">
         <a href="" className="portfolio-item-link">
           <div className="img-wrapper">
             <img
