@@ -38,7 +38,7 @@ function App() {
 
       <Catalog /> */}
       <Routes>
-        <Route path="react-parfume/" element={<Wrapper />}>
+        <Route path="/react-parfume/" element={<Wrapper />}>
           <Route index element={<Home />} />
           <Route path="catalog" element={<Catalog />} />
           {/* <Route path="catalog:id" element={<Catalog />} /> */}

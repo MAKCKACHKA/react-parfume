@@ -27,16 +27,18 @@ export default function Wrapper() {
             {/* <Link className="logo" to="/goit-react-hw-05-movies" end="true">
               Home
             </Link> */}
-            <Link className="logo" to="/react-parfume" end="true">
+            <Link className="logo" to="/react-parfume/" end="true">
               <span className="logo-first-part">Web</span>Studio
             </Link>
             <ul className="navigation-list">
               <li className="navigation-link">
                 <Link
-                  to="/react-parfume"
+                  to="/react-parfume/"
                   end="true"
                   className={
-                    location === "/react-parfume" ? "link current-page" : "link"
+                    location === "/react-parfume/"
+                      ? "link current-page"
+                      : "link"
                   }
                 >
                   Головна
