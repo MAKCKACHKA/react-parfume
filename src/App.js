@@ -22,21 +22,18 @@
 //   );
 // };
 
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
 // import { lazy, useState } from "react";
 
-import Home from "./pages/Home";
-import Catalog from "./pages/Catalog";
-import Wrapper from "./components/Wrapper";
-import Buy from "./pages/Buy";
+import Home from './pages/Home';
+import Catalog from './pages/Catalog';
+import Wrapper from './components/Wrapper';
+import Buy from './pages/Buy';
 
 function App() {
   return (
     <div className="App">
-      {/* <Home />
-
-      <Catalog /> */}
       <Routes>
         <Route path="/react-parfume/" element={<Wrapper />}>
           <Route index element={<Home />} />

@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import React, { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import "swiper/css";
-import "swiper/css/pagination";
+import 'swiper/css';
+import 'swiper/css/pagination';
 
-import "./slider.css";
+import './slider.css';
 
-import { Pagination } from "swiper/modules";
+import { Pagination } from 'swiper/modules';
 
 const parfums = fetch(
-  "https://makckachka.github.io/parfume-project-layout/parfume.json"
+  'https://makckachka.github.io/parfume-project-layout/parfume.json'
 )
-  .then((response) => {
+  .then(response => {
     if (!response.ok) {
       throw new Error(
         `Network response was not ok, status: ${response.status}`
@@ -19,15 +19,15 @@ const parfums = fetch(
     }
     return response.json();
   })
-  .catch((error) => {
-    console.error("Error fetching data:", error);
+  .catch(error => {
+    console.error('Error fetching data:', error);
   });
 
 export default function Slider() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    parfums.then((data) => {
+    parfums.then(data => {
       setData(data);
     });
   }, []);
@@ -37,19 +37,19 @@ export default function Slider() {
     <Swiper
       slidesPerView={4}
       breakpoints={{
-        "@0.00": {
-          slidesPerView: 1,
+        '@0.00': {
+          slidesPerView: 2,
           spaceBetween: 10,
         },
-        "@0.75": {
+        '@0.75': {
           slidesPerView: 2,
           spaceBetween: 20,
         },
-        "@1.00": {
+        '@1.00': {
           slidesPerView: 3,
           spaceBetween: 40,
         },
-        "@1.50": {
+        '@1.50': {
           slidesPerView: 4,
           spaceBetween: 50,
         },

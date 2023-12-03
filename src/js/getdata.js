@@ -17,8 +17,8 @@ function renderButton(index) {
 }
 
 // fetch('https://makckachka.github.io/parfume-project-layout/parfume.json')
-fetch("../parfume.json")
-  .then((response) => {
+fetch('./parfume.json')
+  .then(response => {
     if (!response.ok) {
       throw new Error(
         `Network response was not ok, status: ${response.status}`
@@ -40,8 +40,8 @@ fetch("../parfume.json")
   //   });
   //   return sorted;
   // })
-  .then((data) => {
-    const slideList = document.getElementById("slideList");
+  .then(data => {
+    const slideList = document.getElementById('slideList');
     // const listBullets = document.getElementById('listBullets');
     // console.log(data);
 
@@ -64,10 +64,10 @@ fetch("../parfume.json")
     }
   })
 
-  .then((data) => {
-    const productListDiv = document.getElementById("productList");
+  .then(data => {
+    const productListDiv = document.getElementById('productList');
     if (productListDiv) {
-      data.forEach((product) => {
+      data.forEach(product => {
         const productInfo = renderProd(product);
         // productListDiv.appendChild(productInfo);
         productListDiv.innerHTML += productInfo;
@@ -75,8 +75,8 @@ fetch("../parfume.json")
     }
     return data;
   })
-  .catch((error) => {
-    console.error("Error fetching data:", error);
+  .catch(error => {
+    console.error('Error fetching data:', error);
   });
 
 // function renderPopularItems(data) {

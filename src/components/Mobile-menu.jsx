@@ -1,16 +1,16 @@
-import { IoMdClose } from "react-icons/io";
-import { FaTiktok } from "react-icons/fa";
-import { IoLogoInstagram } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { IoMdClose } from 'react-icons/io';
+import { FaTiktok } from 'react-icons/fa';
+import { IoLogoInstagram } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
-import "../styles/main.css";
+import '../styles/main.css';
 export default function Mobile({ setisMobile, isMobile }) {
   return (
     <div
       className={
         !isMobile
-          ? "menu-container js-menu-container"
-          : "menu-container js-menu-container is-open"
+          ? 'menu-container js-menu-container'
+          : 'menu-container js-menu-container is-open'
       }
       id="mobile-menu"
     >
@@ -69,12 +69,18 @@ export default function Mobile({ setisMobile, isMobile }) {
         </address>
         <ul className="mobile-social-list">
           <li className="mobile-social-list-item">
-            <a href="#" className="mobile-social-list-link">
+            <a
+              href="https://www.instagram.com/?hl=en"
+              className="mobile-social-list-link"
+            >
               <IoLogoInstagram className="mobile-social-list-icon" />
             </a>
           </li>
           <li className="mobile-social-list-item">
-            <a href="" className="mobile-social-list-link">
+            <a
+              href="https://www.tiktok.com/"
+              className="mobile-social-list-link"
+            >
               <FaTiktok className="mobile-social-list-icon" />
             </a>
           </li>

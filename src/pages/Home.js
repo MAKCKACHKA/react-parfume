@@ -1,17 +1,17 @@
 // import { useState } from "react";
 // import "./App.css";
-import Hero from "../components/Hero/Hero";
-import Slider from "../components/Slider/Slider";
-import Top from "../components/Top Sales/Top";
-import Response from "../components/Response/Response";
-import Video from "../components/Video/Video";
-import About from "../components/About us/About";
+import Hero from '../components/Hero/Hero';
+import Slider from '../components/Slider/Slider';
+import Top from '../components/Top Sales/Top';
+import Response from '../components/Response/Response';
+import Video from '../components/Video/Video';
+// import About from '../components/About us/About';
 
 function Home() {
   return (
     <div>
       <Hero />
-      <About></About>
+      {/* <About></About> */}
       <Top>
         <Slider />
       </Top>
