@@ -3,7 +3,6 @@ import { FaTiktok } from 'react-icons/fa';
 import { IoLogoInstagram } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
-import '../styles/main.css';
 export default function Mobile({ setisMobile, isMobile }) {
   return (
     <div

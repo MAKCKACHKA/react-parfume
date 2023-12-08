@@ -106,3 +106,12 @@ Input:valid ~ label {
   box-shadow: none;
   transform: translateY(0);
 }
+
+@media screen and (max-width: 485px) {
+  .Input {
+    width: 250px;
+  }
+  .FormTitle {
+    font-size: 24px;
+  }
+}

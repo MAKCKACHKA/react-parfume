@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import '../../styles/main.css';
 import css from './form.module.css';
+import {
+  changeEmail,
+  changeInsta,
+  changeName,
+  changeNumber,
+} from 'redux/parfums/formSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 let tg = {
   token: '6866127779:AAG0vQHDIjHGP5FE3CsO6hfDQsu2Nuahh7o',
@@ -10,40 +16,26 @@ let tg = {
 
 function sendMessage(text) {
   const url = `https://api.telegram.org/bot${tg.token}/sendMessage`;
-
   const obj = {
     chat_id: tg.chat_id,
     text: text,
   };
-
   const xht = new XMLHttpRequest();
   xht.open('POST', url, true);
   xht.setRequestHeader('Content-type', 'application/json; charset=UTF-8');
   xht.send(JSON.stringify(obj));
 }
 
-// const email = document.getElementById('email');
-// const phone = document.getElementById('phone');
-// const comments = document.getElementById('comments');
-// const form = document.querySelector('.form');
-// form.addEventListener('submit', function (e) {
-//   e.preventDefault();
-//   sendMessage(
-//     `email: ${email.value}\nnumber: ${phone.value}\ncomment: ${comments.value}\n`
-//   );
-
-//   alert('Глянь в чат');
-//   form.reset();
-// });
-
-export default function Form({ data, sum, counters }) {
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
-  const [insta, setInsta] = useState('');
-  const [email, setEmail] = useState('');
-
-  const [send, setSend] = useState([]);
-
+export default function Form({ sum }) {
+  const name = useSelector(state => state.form.name);
+  const number = useSelector(state => state.form.number);
+  const insta = useSelector(state => state.form.insta);
+  const email = useSelector(state => state.form.email);
+  const dispatch = useDispatch();
+  const setName = value => dispatch(changeName(value));
+  const setNumber = value => dispatch(changeNumber(value));
+  const setEmail = value => dispatch(changeEmail(value));
+  const setInsta = value => dispatch(changeInsta(value));
   const handleChange = ({ target }) => {
     if (target.name === 'name') {
       setName(target.value);
@@ -56,9 +48,10 @@ export default function Form({ data, sum, counters }) {
     }
   };
 
+  const [send, setSend] = useState([]);
+
   const handleSubmit = evt => {
     evt.preventDefault();
-    // console.log(name, email, number, insta);
     sendMessage(
       `Ім'я: ${name}\n Телефон: ${number}\n Інста: ${insta}\n Пошта: ${email}\n Замовлення: ${send.map(
         d =>
@@ -67,36 +60,28 @@ export default function Form({ data, sum, counters }) {
     );
 
     alert('Глянь в чат');
+
+    setEmail('');
+    setInsta('');
+    setName('');
+    setNumber('');
   };
 
+  const cart = useSelector(state => state.cart.items);
+
   useEffect(() => {
-    const newData = data.map((product, index) => {
+    const newData = cart.map((product, index) => {
       const itemData = {
         name: product.name,
         price: 100,
-        count: counters[index],
-        totalPrice: !isNaN(counters[index] * 100) ? counters[index] * 100 : 0,
+        count: product.counter,
+        totalPrice: !isNaN(product.counter * 100) ? product.counter * 100 : 0,
       };
-      // console.log(
-      //   'Назва',
-      //   itemData.name,
-      //   '\n',
-      //   'Ціна',
-      //   itemData.price,
-      //   '\n',
-      //   'Ціна*кількість',
-      //   itemData.totalPrice
-      // );
-      // console.log(send);
       return itemData;
     });
 
     setSend(newData);
-  }, [data, counters]);
-
-  // useEffect(() => {
-  //   console.log('Кінцева сума', sum);
-  // }, [sum]);
+  }, [cart]);
 
   return (
     <>

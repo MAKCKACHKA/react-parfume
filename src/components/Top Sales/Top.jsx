@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 export default function Top({ children }) {
   return (
     <section className="sales-section">

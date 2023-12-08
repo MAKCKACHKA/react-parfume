@@ -1,238 +1,94 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-// import "../../styles/main.css";
-import "./products.css";
+import css from './products.module.css';
+import { FiShoppingCart } from 'react-icons/fi';
+
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { addProduct } from 'redux/parfums/shopingSlice';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+const Added = () => toast('Пахнючку добавлено до кошика!');
 
 export default function Products() {
-  const parfums = fetch(
-    "https://makckachka.github.io/parfume-project-layout/parfume.json"
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(
-          `Network response was not ok, status: ${response.status}`
-        );
-      }
-      return response.json();
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
-
   const [data, setData] = useState([]);
+  const apiUrl =
+    'https://makckachka.github.io/parfume-project-layout/parfume.json';
 
   useEffect(() => {
-    parfums.then((data) => {
-      setData(data);
-    });
-  }, [parfums]);
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(apiUrl);
+
+        if (response.status !== 200) {
+          throw new Error(
+            `Network response was not ok, status: ${response.status}`
+          );
+        }
+        setData(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const cart = useSelector(state => state.cart.items);
+  const dispatch = useDispatch();
+  const handleAddToCart = product => {
+    dispatch(addProduct(product));
+  };
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   return (
-    <ul className="portfolio-list">
-      {data.map((product) => (
-        <li key={product.code} className="portfolio-list-item">
-          <div className="portfolio-item-link">
-            <div className="img-wrapper">
-              <img
-                className="prod-img"
-                src={product.image}
-                alt={product.name}
-                width="356"
-                height="356"
-              />
-              <p className="overlay">{product.description}</p>
+    <>
+      <ToastContainer />
+      <ul className={css.ProductList}>
+        {data.map(product => (
+          <li key={product.code} className={css.ProductListItem}>
+            <div className={css.ProductListLink}>
+              <div className={css.imgWrapper}>
+                {!cart.some(item => item.code === product.code) ? (
+                  <button
+                    type="button"
+                    className={css.addToCart}
+                    onClick={() => {
+                      handleAddToCart(product);
+                      Added();
+                    }}
+                  >
+                    <FiShoppingCart className={css.addToCartIcon} />
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    type="button"
+                    className={css.success}
+                    onClick={() => handleAddToCart(product)}
+                  >
+                    <FiShoppingCart className={css.addToCartIcon} />
+                  </button>
+                )}
+                <img
+                  className={css.prodImg}
+                  src={product.image}
+                  alt={product.name}
+                />
+                <p className={css.overlay}>{product.description}</p>
+              </div>
+              <div className={css.ProductText}>
+                <h3 className={css.ProductItemTitle}>{product.name}</h3>
+                <p className={css.ProductItemText}>{product.description}</p>
+              </div>
             </div>
-            <div className="portfolio-text">
-              <h3 className="portfolio-item-title">{product.name}</h3>
-              <p className="portfolio-item-text">{product.description}</p>
-            </div>
-          </div>
-        </li>
-      ))}
-
-      {/* <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/"
-              alt="Banking App Interface Concept"
-              max-width="360"
-            />
-
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">
-              Banking App Interface Concept
-            </h3>
-            <p className="portfolio-item-text">App</p>
-          </div>
-        </a>
-      </li> */}
-      {/*<li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/cashlesspayment.jpg"
-              alt="Cashless Payment"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Cashless Payment</h3>
-            <p className="portfolio-item-text">Marketing</p>
-          </div>
-        </a>
-      </li>
-      <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/meditaionapp.jpg"
-              alt="Meditaion App"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Meditaion App</h3>
-            <p className="portfolio-item-text">App</p>
-          </div>
-        </a>
-      </li>
-      <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/taxiservice.jpg"
-              alt="Taxi Service"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Taxi Service</h3>
-            <p className="portfolio-item-text">Marketing</p>
-          </div>
-        </a>
-      </li>
-      <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/screenillustrations.jpg"
-              alt="Screen Illustrations"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Screen Illustrations</h3>
-            <p className="portfolio-item-text">Design</p>
-          </div>
-        </a>
-      </li>
-      <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/onlinecourses.jpg"
-              alt="Online Courses"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Online Courses</h3>
-            <p className="portfolio-item-text">Marketing</p>
-          </div>
-        </a>
-      </li>
-      <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/instagramstoriessconcept.jpg"
-              alt="Instagram Stories Concept"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Instagram Stories Concept</h3>
-            <p className="portfolio-item-text">Design</p>
-          </div>
-        </a>
-      </li>
-      <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/organicfood.jpg"
-              alt="Organic Food"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Organic Food</h3>
-            <p className="portfolio-item-text">Web Site</p>
-          </div>
-        </a>
-      </li>
-      <li className="portfolio-list-item">
-        <a href="" className="portfolio-item-link">
-          <div className="img-wrapper">
-            <img
-              src="../../images/freshcoffee.jpg"
-              alt="Fresh Coffee"
-              max-width="360"
-            />
-            <p className="overlay">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis,
-              quas molestiae dolores illo adipisci sint? Praesentium culpa
-              beatae amet exercitationem?
-            </p>
-          </div>
-          <div className="portfolio-text">
-            <h3 className="portfolio-item-title">Fresh Coffee</h3>
-            <p className="portfolio-item-text">Web Site</p>
-          </div>
-        </a>
-      </li> */}
-    </ul>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }

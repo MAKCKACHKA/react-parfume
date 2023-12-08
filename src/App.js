@@ -28,8 +28,11 @@ import { Route, Routes } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
-import Wrapper from './components/Wrapper';
+import Wrapper from './components/Wrapper/Wrapper';
 import Buy from './pages/Buy';
+
+import './styles/main.css';
+import './styles/root.css';
 
 function App() {
   return (

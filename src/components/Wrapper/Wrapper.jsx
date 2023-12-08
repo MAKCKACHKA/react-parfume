@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import '../images/icons.svg';
+// import '../../images/icons.svg';
 import { FaTiktok } from 'react-icons/fa';
-import { IoMenuSharp } from 'react-icons/io5';
+// import { IoMenuSharp } from 'react-icons/io5';
 import { IoLogoInstagram } from 'react-icons/io5';
 import { FiShoppingCart } from 'react-icons/fi';
-
 import { Suspense } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-// import "./wrapper-styles.css";
-import '../styles/main.css';
-import ScrollUp from './ScrollUp';
-import Mobile from './Mobile-menu';
+import css from './wrapper.module.css';
 
+import ScrollUp from '../ScrollUp/ScrollUp';
+// import Mobile from '../Mobile/Mobile-menu.jsx';
 import { useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SvgComponent = props => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1125 1006" {...props}>
@@ -26,41 +25,44 @@ const SvgComponent = props => (
 );
 
 export default function Wrapper() {
-  const [isMobile, setisMobile] = useState(false);
+  // const [isMobile, setisMobile] = useState(false);
   const location = useLocation().pathname;
+
+  const cart = useSelector(state => state.cart.items);
+
   return (
     <>
       <header>
-        <div className="container header-container">
-          <nav className="navigation">
+        <div className={[css.container, css.headerContainer].join(' ')}>
+          <nav className={css.navigation}>
             {/* <Link className="logo" to="/goit-react-hw-05-movies" end="true">
               Home
             </Link> */}
-            <Link className="logo" to="/react-parfume/" end="true">
-              <SvgComponent className="logo-icon" />
+            <Link className={css.logo} to="/react-parfume/" end="true">
+              <SvgComponent className={css.logoIcon} />
             </Link>
-            <ul className="navigation-list">
-              <li className="navigation-link">
+            <ul className={css.navigationList}>
+              <li className={css.navigationLink}>
                 <Link
                   to="/react-parfume/"
                   end="true"
                   className={
                     location === '/react-parfume/'
-                      ? 'link current-page'
-                      : 'link'
+                      ? [css.link, css.currentPage].join(' ')
+                      : css.link
                   }
                 >
                   Головна
                 </Link>
               </li>
-              <li className="navigation-link">
+              <li className={css.navigationLink}>
                 <Link
                   to="/react-parfume/catalog"
                   end="true"
                   className={
                     location === '/react-parfume/catalog'
-                      ? 'link current-page'
-                      : 'link'
+                      ? [css.link, css.currentPage].join(' ')
+                      : css.link
                   }
                 >
                   Каталог
@@ -73,7 +75,7 @@ export default function Wrapper() {
               </li> */}
             </ul>
           </nav>
-          <address>
+          {/* <address>
             <ul className="adress-list">
               <li className="adress-item">
                 <a href="mailto:info@devstudio.com" className="adress-link">
@@ -86,79 +88,61 @@ export default function Wrapper() {
                 </a>
               </li>
             </ul>
-          </address>
-          <Link to="/react-parfume/buy" end="true" className="link">
-            <FiShoppingCart className="cart-icon" />
-            <div className="cart-icon-info">
-              <p>1</p>
-            </div>
+          </address> */}
+          <Link to="/react-parfume/buy" end="true" className={css.link}>
+            <FiShoppingCart className={css.cartIcon} />
+            {Number(cart.length) >= 1 && (
+              <p className={css.cartIconInfo}>{Number(cart.length)}</p>
+            )}
           </Link>
 
-          <button
+          {/* <button
             className="menu-toggle js-open-menu"
             aria-expanded="false"
             aria-controls="mobile-menu"
             onClick={() => setisMobile(true)}
           >
-            {/* <svg className="mobile-menu-button">
-              <use href="./icons.svg\#icon-brgr-converted"></use>
-            </svg> */}
             <IoMenuSharp className="mobile-menu-button" />
-          </button>
+          </button> */}
         </div>
       </header>
 
-      <Suspense fallback={<div className="hero-title">Loading page...</div>}>
+      <Suspense fallback={<div className="Loading">Loading page...</div>}>
         <Outlet />
       </Suspense>
 
-      <footer className="footer">
-        <ul className="container footer-list">
-          <li className="footer-container">
-            <Link className="logo" to="/react-parfume/" end="true">
-              <SvgComponent className="logo-icon" />
+      <footer className={css.footer}>
+        <ul className={[css.container, css.footerList].join(' ')}>
+          <li className={css.footerContainer}>
+            <Link className={css.logo} to="/react-parfume/" end="true">
+              <SvgComponent className={css.logoIcon} />
             </Link>
             {/* <p className="footer-text">
               Increase the flow of customers and sales for your business with
               digital marketing & growth solutions.
             </p> */}
           </li>
-          <li className="footer-social-list-box">
-            <p className="footer-contain-text">Social media</p>
-            <ul className="footer-social-list">
-              <li className="footer-social-list-item">
+          <li className={css.footerSocialListBox}>
+            <p className={css.footerContainText}>Social media</p>
+            <ul className={css.footerSocialList}>
+              <li>
                 <a
                   href="https://www.instagram.com/?hl=en"
-                  className="footer-social-list-link"
+                  className={css.footerSocialListLink}
                 >
-                  <IoLogoInstagram className="footer-social-list-icon" />
+                  <IoLogoInstagram className={css.footerSocialListIcon} />
                 </a>
               </li>
-              <li className="footer-social-list-item">
+              <li>
                 <a
                   href="https://www.tiktok.com/"
-                  className="footer-social-list-link"
+                  className={css.footerSocialListLink}
                 >
-                  <FaTiktok className="footer-social-list-icon" />
+                  <FaTiktok className={css.footerSocialListIcon} />
                 </a>
               </li>
-              {/* <li className="footer-social-list-item">
-                <a href="" className="footer-social-list-link">
-                  <svg className="footer-social-list-icon">
-                    <use href="../images/icons.svg#facebook"></use>
-                  </svg>
-                </a>
-              </li>
-              <li className="footer-social-list-item">
-                <a href="" className="footer-social-list-link">
-                  <svg className="footer-social-list-icon">
-                    <use href="../images/icons.svg#linkedin"></use>
-                  </svg>
-                </a>
-              </li> */}
             </ul>
           </li>
-
           {/* <li className="subscribe-item">
             <p className="footer-contain-text">Subscribe</p>
             <form className="subscribe-form">
@@ -182,7 +166,7 @@ export default function Wrapper() {
         </ul>
       </footer>
       <ScrollUp />
-      {<Mobile isMobile={isMobile} setisMobile={setisMobile} />}
+      {/* {<Mobile isMobile={isMobile} setisMobile={setisMobile} />} */}
     </>
   );
 }

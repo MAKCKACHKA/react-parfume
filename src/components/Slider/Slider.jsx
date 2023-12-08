@@ -33,7 +33,6 @@ export default function Slider() {
   }, []);
 
   return (
-    // <section className="swiper-section">
     <Swiper
       slidesPerView={4}
       breakpoints={{
@@ -85,6 +84,5 @@ export default function Slider() {
         </SwiperSlide>
       ))}
     </Swiper>
-    // </section>
   );
 }
