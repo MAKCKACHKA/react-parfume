@@ -1,18 +1,17 @@
 {
   "files": {
-    "main.css": "/react-parfume/static/css/main.9d7b19b2.css",
-    "main.js": "/react-parfume/static/js/main.adc34f8f.js",
+    "main.css": "/react-parfume/static/css/main.dfc94de2.css",
+    "main.js": "/react-parfume/static/js/main.17c821a0.js",
     "static/js/787.0f8d78ff.chunk.js": "/react-parfume/static/js/787.0f8d78ff.chunk.js",
     "static/media/photo_2023-11-28_09-57-43.jpg": "/react-parfume/static/media/photo_2023-11-28_09-57-43.e15b607501dc21181381.jpg",
     "static/media/photo_2023-11-28_09-57-32.jpg": "/react-parfume/static/media/photo_2023-11-28_09-57-32.e0e94d1203512fc7e860.jpg",
-    "static/media/icons.svg": "/react-parfume/static/media/icons.8988883827bff55f140e78faad1063ec.svg",
     "index.html": "/react-parfume/index.html",
-    "main.9d7b19b2.css.map": "/react-parfume/static/css/main.9d7b19b2.css.map",
-    "main.adc34f8f.js.map": "/react-parfume/static/js/main.adc34f8f.js.map",
+    "main.dfc94de2.css.map": "/react-parfume/static/css/main.dfc94de2.css.map",
+    "main.17c821a0.js.map": "/react-parfume/static/js/main.17c821a0.js.map",
     "787.0f8d78ff.chunk.js.map": "/react-parfume/static/js/787.0f8d78ff.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d7b19b2.css",
-    "static/js/main.adc34f8f.js"
+    "static/css/main.dfc94de2.css",
+    "static/js/main.17c821a0.js"
   ]
 }
